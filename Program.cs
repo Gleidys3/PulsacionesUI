@@ -12,11 +12,13 @@ namespace PulsacionesUI
         static Persona persona;
         static PersonaService personaService = new PersonaService();
 
-        static void Main(string[] args){
+        static void Main(string[] args)
+        {
             Menu();
         }
 
-        public static void Menu(){
+        public static void Menu()
+        {
             int opcion;
             do
             {
@@ -29,18 +31,20 @@ namespace PulsacionesUI
                 Console.WriteLine(" 5. Salir");
                 Console.WriteLine(" ---------------------------------");
                 Console.Write("\n DIGITE UNA OPCION: "); opcion = Int32.Parse(Console.ReadLine());
-                switch (opcion){
+                switch (opcion)
+                {
                     case 1: Registrarse(); break;
                     case 2: Buscar(); break;
-                    case 3: Modificar();  break;
+                    case 3: Modificar(); break;
                     case 4: Consultar(); break;
                     case 5: Console.Write("\n Presione enter para salir..."); Console.ReadKey(); break;
                     default: Console.WriteLine("\n Numero fuera de rango intente de nuevo..."); break;
                 }
-            } while (opcion!=5);
+            } while (opcion != 5);
         }
 
-        public static void Registrarse(){
+        public static void Registrarse()
+        {
             persona = new Persona();
             Console.WriteLine("\n Digite su informacion");
             Console.Write(" Identifiacion: "); persona.Identificacion = Console.ReadLine();
@@ -77,7 +81,7 @@ namespace PulsacionesUI
             int opcion;
             Buscar();
             Console.Clear();
-            if (persona!=null)
+            if (persona != null)
             {
                 do
                 {
@@ -99,14 +103,14 @@ namespace PulsacionesUI
                         default:
                             break;
                     }
-                } while (opcion!=5);
+                } while (opcion != 5);
             }
         }
         public static void ModificarIdentificacion()
         {
             string identificacion;
             Console.Write("\n Digite nueva Identificacion: "); identificacion = Console.ReadLine();
-            
+
             if (personaService.BuscarIdentificacion(identificacion) != null)
             {
                 Console.WriteLine("\n El numero de identifacion ya existe");
@@ -117,7 +121,7 @@ namespace PulsacionesUI
                 Console.WriteLine("\n Identificacion modificada correctamente");
                 Console.Write("\n Pulse enter para continuar..."); Console.ReadKey();
             }
-            
+
         }
         public static void ModificarNombre()
         {
@@ -132,7 +136,7 @@ namespace PulsacionesUI
             int edad;
             Console.Write("\n Digite nuevo edad: "); edad = Int32.Parse(Console.ReadLine());
             persona.Edad = edad;
-            persona.Pulsacion = persona.CalcularPulsacion(persona.Genero,persona.Edad);
+            persona.Pulsacion = persona.CalcularPulsacion(persona.Genero, persona.Edad);
             Console.WriteLine("\n Edad modificada correctamente");
             Console.Write("\n Pulse enter para continuar..."); Console.ReadKey();
         }
@@ -146,29 +150,7 @@ namespace PulsacionesUI
             Console.Write("\n Pulse enter para continuar..."); Console.ReadKey();
         }
 
-        public static void Consultar()
-        {
-            List<Persona> personas = personaService.Consultar();
-            if (personas.Count == 0)
-            {
-                Console.WriteLine("\n No hay personas registradas");
-            }
-            else
-            {
-                foreach (var itemPersona in personas)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("\n Consulta de personas");
-                    Console.WriteLine("\n --------------------");
-                    Console.WriteLine($" Identificacion: {itemPersona.Identificacion}");
-                    Console.WriteLine($" Nombre: {itemPersona.Nombre}");
-                    Console.WriteLine($" Edad: {itemPersona.Edad}");
-                    Console.WriteLine($" Genero: {itemPersona.Genero}");
-                    Console.WriteLine($" Pulsaciones: {itemPersona.Pulsacion}");
-                    Console.WriteLine(" --------------------");
-                }
-            }
-            Console.Write("\n Pulse enter para continuar..."); Console.ReadKey();
-        }
+
     }
+            
 }
